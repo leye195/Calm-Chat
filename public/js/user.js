@@ -3,7 +3,29 @@ btns=document.querySelectorAll(".room button"),js_room=document.querySelector(".
 room_madal=document.querySelector(".room_modal"),exit_btn=document.querySelector(".exit_container"),
 room_btns=document.querySelectorAll(".room_btns button"),room_input=document.querySelector(".room_input"),
 room_ul=document.querySelector(".room_ul");
+const r_socket=io();
 const USER_NICK="USER_NICK";
+
+function add_room(room){
+    console.log(room);
+    const li=create_tag(room);
+    room_ul.appendChild(li);
+}
+function create_room(){
+    const val=room_input.value;
+    console.log(val);
+    add_room(val);
+    r_socket.emit('create room',val);
+    r_socket.on('create room',(data)=>{
+        if(data.room_name!==undefined){
+            console.log(data);
+            add_room(data.room_name);
+        }
+    })
+    room_input.value="";
+    _close();
+}
+
 function handleNickname(e){
     const target=e.target;
         if(e.keyCode===13){
@@ -18,7 +40,7 @@ function load_nickname(){
 }   
 function save_nickname(nickname){
     sessionStorage.setItem(USER_NICK,nickname);
-    login_page.page.style.display="none";
+    login_page.style.display="none";
 }
 function _open(){
     room_madal.style.display="block";
@@ -40,13 +62,6 @@ function create_tag(name){
     li.appendChild(div);
     return li;
 }
-function create_room(){
-    const val=room_input.value;
-    const li=create_tag(val);
-    room_ul.appendChild(li);
-    room_input.value="";
-    _close();
-}
 function init(){
     load_nickname();
     nick.addEventListener("keydown",handleNickname);
@@ -59,6 +74,11 @@ function init(){
     exit_btn.addEventListener("click",_close);
     room_btns[0].addEventListener("click",create_room);
     room_btns[1].addEventListener("click",_close);
-
+    r_socket.emit('create room',"");
+    r_socket.on('create room',(data)=>{
+        if(data.room_name!==undefined)
+            add_room(data.room_name);
+        console.log(data);
+    })
 }
 init();

@@ -5,52 +5,62 @@ const io=require("socket.io")(http)
 //Initialize a new instance of socket.io by passing the http (the HTTP server) object
 //then listen on the connection event for incoming socket
 const port =  3030;
-let room=['room1','room2'],users=0;
-let cnt=0;
+//let room=['room1','room2'],users=0;
+let users=0;
+var socketList=[]
 app.use(express.static(__dirname + '/public'));
 io.on('connection',(socket)=>{
+    socket.on("leaveRoom",(room,name)=>{
+        socket.leave(room,()=>{
+            if(users>0)users--;
+            io.to(room).emit("leaveRoom",name);
+            socketList.splice(socketList.indexOf(socket), 1);
+        });
+    });
+    socket.on("joinRoom",(room,name)=>{
+        socket.username=name;
+        socket.join(room,()=>{
+            console.log(`${name} joined a ${room}`);
+            users++;
+            io.to(room).emit('joinRoom',{room:room,name:name,numbers:users});
+            socketList.push(socket);
+        });
+    });
+    socket.on('chat message',(room,msg)=>{
+        //socketList.forEach((item)=>{
+            //console.log("compare:"+(item===socket));
+            //if(item!==socket){
+            //console.log("name:"+item.username,msg);
+                socket.to(room).broadcast.emit('chat message',{
+                    username:socket.username,
+                    message:msg
+                });
+            //}
+        //})      
+    });
+    socket.on('create room',(data)=>{
+        if(data===""){
+            console.log(data);
+            socket.broadcast.emit('create room',{
+                room_name:undefined
+            })
+        }else{
+            console.log(data);
+            socket.broadcast.emit('create room',{
+                room_name:data
+            })
+        }
+    })
     socket.on('disconnect',()=>{
         console.log('user disconnected');
-    });
-    socket.on("leaveRoom",(num,name)=>{
-        socket.leave(room[num],()=>{
-            if(users>0)users--;
-            console.log(`${name} leave a ${room[num]}`);
-            io.to(room[num]).emit("leaveRoom",num,name);
-            console.log(users);
-        });
-    });
-    socket.on("joinRoom",(num,name)=>{
-        socket.join(room[num],()=>{
-            console.log(`${name} joined a ${room[num]}`);
-            users++;
-            io.to(room[num]).emit('joinRoom',num,name);
-            io.to(room[num]).emit('login',{
-                numbers:users
-            });
-            //// echo globally (all clients) that a person has connected
-            socket.broadcast.to(room[num]).emit('added',{//본인을 제외한 모든 사람에게 전달
-                username:name,
-                numbers:users
-            });
-            console.log("nums:"+users);
-        });
-    });
-    socket.on('chat message',(num,name,msg)=>{
-        cnt=num;
-        io.to(room[cnt]).emit('chat message',num,name,msg);
+        socketList.splice(socketList.indexOf(socket), 1);
     });
 });
 //io.emit('some event', { someProperty: 'some value', otherProperty: 'other value' }); 
 // This will emit the event to all connected sockets
-const namespace1=io.of('/room1');
-namespace1.on('connection',(socket)=>{  
-    namespace1.emit('news',{hello:'newssss'});
-})
+
 //socket.join()으로 room 접속, socket.leave()으로 room 나감, io.to() 특정 room에 이벤트 보내기
 //io.to("").emit("");
-
-
 app.get('/',(req,res)=>{
     res.sendFile(__dirname+'/public/html/index.html');
 })
