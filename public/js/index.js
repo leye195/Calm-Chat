@@ -3,10 +3,12 @@ const f=document.querySelector("form"),input=document.querySelector("#m"),
     send=document.querySelector("#send"),u=document.querySelector("#message"),
     e_btn=document.querySelector(".exit_btn");
 const USER_NICK="USER_NICK";
+//inform the number of participant in the room
 function participantsMessage(data){
     let msg=`방 참가 인원: ${data.numbers}명`;
     log(msg);
 }
+//
 function log(msg){
     const li=document.createElement("li");
     li.className="log";
@@ -15,8 +17,8 @@ function log(msg){
     u.scrollTop = u.scrollHeight;
 }
 function receiveMessage(name,msg){
-    const li=document.createElement("li");
-    const img=new Image(40,40),span=document.createElement("span"),p=document.createElement("p");
+    const li=document.createElement("li"),img=new Image(40,40),
+    span=document.createElement("span"),p=document.createElement("p");
     img.src="/img/user.png";
     img.className="user_img";
     span.className="user_name";
@@ -29,11 +31,10 @@ function receiveMessage(name,msg){
     li.classList.add("msg_li");
     u.appendChild(li);
     u.scrollTop = u.scrollHeight;
-    //console.log(u.scrollTop(u.scrollWidth),u.scrollHeight);
 }
 function sendMessage(name,msg){
-    const li=document.createElement("li");
-    const img=new Image(40,40),span=document.createElement("span"),p=document.createElement("p");
+    const li=document.createElement("li"),img=new Image(40,40),
+    span=document.createElement("span"),p=document.createElement("p");
     img.src="/img/user.png";
     span.className="name_r";
     span.innerText=name;
@@ -47,6 +48,8 @@ function sendMessage(name,msg){
     u.appendChild(li);
     u.scrollTop = u.scrollHeight;
 }
+
+//load username from sessionStorage
 function loadUser(){
     const user=sessionStorage.getItem(USER_NICK);
     log(`Welcome ${user}`);
@@ -55,6 +58,7 @@ function loadUser(){
 function load_socket(){
     const name=loadUser(),room=((window.location.pathname).split("/").slice(-1))-1;
     socket.emit('joinRoom',room,name);//joinRoom 
+    //user submit the message
     f.addEventListener('submit',(e)=>{
         e.preventDefault();
         socket.emit('chat message',room,input.value);
@@ -80,7 +84,7 @@ function load_socket(){
         console.log(data);
     })
     e_btn.addEventListener("click",(e)=>{
-        if(window.confirm("Do you want to leave?")){
+        if(window.confirm("정말 나가시겠습니까?")){
             socket.emit('leaveRoom',room,name);
             history.back();
         }        

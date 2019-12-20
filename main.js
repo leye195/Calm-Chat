@@ -5,14 +5,12 @@ const io=require("socket.io")(http)
 //Initialize a new instance of socket.io by passing the http (the HTTP server) object
 //then listen on the connection event for incoming socket
 const port =  3030;
-//let room=['room1','room2'],users=0;
 let users=0;
 var socketList=[]
 app.use(express.static(__dirname + '/public'));
 io.on('connection',(socket)=>{
     socket.on("leaveRoom",(room,name)=>{
         socket.leave(room,()=>{
-            if(users>0)users--;
             io.to(room).emit("leaveRoom",name);
             socketList.splice(socketList.indexOf(socket), 1);
         });
@@ -27,16 +25,11 @@ io.on('connection',(socket)=>{
         });
     });
     socket.on('chat message',(room,msg)=>{
-        //socketList.forEach((item)=>{
-            //console.log("compare:"+(item===socket));
-            //if(item!==socket){
-            //console.log("name:"+item.username,msg);
-                socket.to(room).broadcast.emit('chat message',{
-                    username:socket.username,
-                    message:msg
-                });
-            //}
-        //})      
+        //let all client receive the message
+        socket.to(room).broadcast.emit('chat message',{
+                username:socket.username,
+                message:msg
+        });   
     });
     socket.on('create room',(data)=>{
         if(data===""){
@@ -53,6 +46,7 @@ io.on('connection',(socket)=>{
     })
     socket.on('disconnect',()=>{
         console.log('user disconnected');
+        if(users>0)users--;
         socketList.splice(socketList.indexOf(socket), 1);
     });
 });
@@ -64,8 +58,11 @@ io.on('connection',(socket)=>{
 app.get('/',(req,res)=>{
     res.sendFile(__dirname+'/public/html/index.html');
 })
+app.get('/more',(req,res)=>{
+    res.sendFile(__dirname+'/public/html/more.html')
+})
 app.get('/room/:room_name',(req,res)=>{
-    res.sendFile(__dirname+'/public/html/room.html');
+    res.sendFile(__dirname+'/public/html/chat.html');
 })
 //app.listen(port,()=>console.log(`Sever is running on ${port}`))
 http.listen(port,()=>console.log(`Connected to ${port}`));

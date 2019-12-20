@@ -10,15 +10,17 @@
 </head>
 <body>
     <header>
-        <span>SocIO</span>
+        <span class="title">SocIO</span><img class="h_icon" src="/img/h_icon.png">
         <div class="exit_btn"><img src="/img/leave.png"/></div>
     </header>
+    <p class="clock"></p>
     <ul id="message"></ul>
     <form>
         <button id="img_btn">+</button>
-        <input id="m" type="text" autocomplete="off"/>
+        <input id="m" type="text" autocomplete="off" placeholder="type a message"/>
         <button id="send" >Send</button>
     </form>
     <script src="/js/index.js"></script>
+    <script src="/js/clock.js"></script>
 </body>
 </html>
