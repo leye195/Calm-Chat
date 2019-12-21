@@ -1,0 +1,17 @@
+.friend_section{
+    height: 100%;
+    border-bottom: 1px solid #dadada;
+}
+.friend_main{
+    height: 95px;
+    text-align: center;
+}
+.user_div img{
+    margin:10px;
+    width: 45px;
+    height: 45px;
+    border-radius: 30px;
+}
+.user_div div>p{
+    font-weight: 700;
+}
