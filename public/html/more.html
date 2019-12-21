@@ -15,10 +15,31 @@
     </header>
     <p class="clock"></p>
     <section class="more_section">
-        <main class="more_main">
-
-        </main>
+        <div class="more more_main">
+            <div class="user_div">
+                <img src="/img/user.png"/>
+                <div>
+                    <p class="more_username">Username</p>
+                </div>
+            </div>
+        </div>
+        <div class="more more_options">
+            <div class="themes">
+                <img src="/img/brush.png"/>
+                <p>Themes</p>
+            </div>
+            <div class="account">
+                <img src="/img/account.png"/>
+                <p>Account</p>
+            </div>
+        </div>
     </section>
+    <div class="login_page" style="display: none;">
+        <div class="form">
+            <h3 class="form_h3">What is your nickname?</h3>
+            <input class="nickname" type="text" placeholder="type your nickname" maxlength="14"/>
+        </div>
+    </div>
     <nav>
         <a href="/" >
             <img src="/img/chat.png"/><span>Chats</span>
@@ -27,7 +48,9 @@
             <img src="/img/more_active.png"/><span>More</span>
         </a>
     </nav>
+    
     <script src="/js/nav.js"></script>
     <script src="/js/clock.js"></script>
+    <script src="/js/more.js"></script>
 </body>
 </html>
