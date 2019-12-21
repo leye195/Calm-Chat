@@ -1,73 +1,97 @@
-const nick=document.querySelector(".nickname"),login_page=document.querySelector(".login_page");
-btns=document.querySelectorAll(".room button"),js_room=document.querySelector(".js_room"),
+const btns=document.querySelectorAll(".g_room button"),js_room=document.querySelector(".js_room"),
 room_madal=document.querySelector(".room_modal"),exit_btn=document.querySelector(".exit_container"),
 room_btns=document.querySelectorAll(".room_btns button"),room_input=document.querySelector(".room_input"),
-room_ul=document.querySelector(".room_ul"),nav_item=document.querySelectorAll("nav a");
+room_ul=document.querySelector(".room_ul"),nav_item=document.querySelectorAll("nav a"),
+one=document.querySelector(".one"),group=document.querySelector(".group"),
+one_list=document.querySelector(".one_list"),group_list=document.querySelector(".group_list");
 const r_socket=io();
-const USER_NICK="USER_NICK";
-
-function add_room(room){
-    console.log(room);
-    const li=create_tag(room);
-    room_ul.appendChild(li);
-}
 function create_room(){
     const val=room_input.value;
-    console.log(val);
-    add_room(val);
-    r_socket.emit('create room',val);
-    r_socket.on('create room',(data)=>{
-        if(data.room_name!==undefined){
-            console.log(data);
-            add_room(data.room_name);
-        }
-    })
+    if(group.classList.contains("menu_active")){
+        add_room(val,"group");
+        r_socket.emit('create room',val);
+        r_socket.on('create room',(data)=>{
+            if(data.room_name!==undefined){
+                console.log(data);
+                add_room(data.room_name,"group");
+            }
+        });
+    }else if(one.classList.contains("menu_active")){
+        add_room(val,"personal");
+        r_socket.emit('create room',val);
+        r_socket.on('create room',(data)=>{
+            if(data.room_name!==undefined){
+                console.log(data);
+                add_room(data.room_name,"personal");
+            }
+        });
+    }
     room_input.value="";
     _close();
 }
-function handleNickname(e){
-    const target=e.target;
-        if(e.keyCode===13){
-            save_nickname(target.value);
-            target.value="";
-        }
+function _open(){room_madal.style.display="block";}
+function _close(){room_madal.style.display="none";}
+function add_room(room,type){
+    const li=create_tag(room,type);
+    if(type==="group")group_list.appendChild(li);
+    else if(type==="personal")one_list.appendChild(li);
 }
-function load_nickname(){
-    const nickname=sessionStorage.getItem(USER_NICK);
-    if(!nickname){login_page.style.display="block";}
-    else{login_page.style.display="none";}
-}   
-function save_nickname(nickname){
-    sessionStorage.setItem(USER_NICK,nickname);
-    login_page.style.display="none";
-}
-function _open(){
-    room_madal.style.display="block";
-}
-function _close(){
-    room_madal.style.display="none";
-}
-
-function create_tag(name){
+function create_tag(name,type){
     const li=document.createElement("li"),div=document.createElement("div"),
-    p=document.createElement("p"),button=document.createElement("button");
-    div.classList.add("room");
-    p.innerText=name;
-    button.innerText="Enter";
-    button.addEventListener("click",()=>{
-        window.location.href=`/room/${name}`;
-    })
-    div.appendChild(p);
-    div.appendChild(button);
+    r_div=document.createElement("div"),img=new Image();
+    if(type==="group"){
+        const span=document.createElement("span"),button=document.createElement("button");
+        div.classList.add("g_room");
+        img.src="/img/group.png";
+        img.className="group_img";
+        span.innerText=name;
+        button.innerText="Enter";
+        button.addEventListener("click",()=>{
+            window.location.href=`/group/${name}`;
+        })
+        r_div.appendChild(img);
+        r_div.appendChild(span);
+        r_div.appendChild(button);
+        div.appendChild(r_div);
+    }else if(type==="personal"){
+        const p1=document.createElement("p"),p2=document.createElement("p");
+        div.classList.add("o_room");
+        img.src="/img/user.png";
+        img.className="user_img";
+        p1.textContent=name;
+        p2.textContent="";
+        r_div.appendChild(p1);
+        r_div.appendChild(p2);
+        div.appendChild(img);
+        div.appendChild(r_div);
+        div.addEventListener("click",()=>{
+            window.location.href=`/chat/${name}`;
+        });
+    }
     li.appendChild(div);
     return li;
 }
+function toOne(e){
+    if(!one.classList.contains("menu_active")){
+        one.classList.toggle("menu_active");
+        group.classList.toggle("menu_active");
+        one_list.style.display="block";
+        group_list.style.display="none";
+    }
+}
+function toGroup(e){
+    if(!group.classList.contains("menu_active")){
+        one.classList.toggle("menu_active");
+        group.classList.toggle("menu_active");
+        group_list.style.display="block";
+        one_list.style.display="none";
+    }
+}
 function init(){
-    load_nickname();
-    nick.addEventListener("keydown",handleNickname);
+    //load_nickname();
     btns.forEach((item,i)=>{
         item.addEventListener("click",()=>{
-            window.location.href=`/room/${i+1}`;
+            window.location.href=`/group/${i+1}`;
         })
     });
     js_room.addEventListener("click",_open);
@@ -78,5 +102,7 @@ function init(){
     r_socket.on('create room',(data)=>{
         if(data.room_name!==undefined)add_room(data.room_name);
     });
+    one.addEventListener("click",toOne);
+    group.addEventListener("click",toGroup);
 }
 init();

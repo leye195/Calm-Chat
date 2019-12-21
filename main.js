@@ -58,10 +58,16 @@ io.on('connection',(socket)=>{
 app.get('/',(req,res)=>{
     res.sendFile(__dirname+'/public/html/index.html');
 })
+app.get('/chats',(req,res)=>{
+    res.sendFile(__dirname+'/public/html/chats.html');
+})
 app.get('/more',(req,res)=>{
     res.sendFile(__dirname+'/public/html/more.html')
 })
-app.get('/room/:room_name',(req,res)=>{
+app.get('/group/:room_name',(req,res)=>{
+    res.sendFile(__dirname+'/public/html/chat.html');
+})
+app.get('/chat/:user_name',(req,res)=>{
     res.sendFile(__dirname+'/public/html/chat.html');
 })
 //app.listen(port,()=>console.log(`Sever is running on ${port}`))

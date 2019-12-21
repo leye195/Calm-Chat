@@ -11,28 +11,16 @@
 <body>
     <header>
         <span class="title">SocIO</span><img class="h_icon" src="/img/h_icon.png">
-        <div class="js_room"><img src="/img/add.png"/></div>
     </header>
     <p class="clock"></p>
-    <ul class="room_ul">
-        <li>
-            <div class="room">
-                <p>Room1</p>
-                <button>Enter</button>
-            </div>
-        </li>
-        <li>
-            <div class="room">
-                <p>Room2</p>
-                <button>Enter</button>
-            </div>
-        </li>
-    </ul>
     <nav>
         <a href="/" class="active">
-            <img src="/img/chat_active.png"/><span>Chats</span>
+            <img src="/img/friends_active.png"/><span>Friends</span>
         </a>
-        <a href="/more">
+        <a href="/chats" >
+            <img src="/img/chat.png"/><span>Chats</span>
+        </a>
+        <a href="/more" >
             <img src="/img/more.png"/><span>More</span>
         </a>
     </nav>
@@ -42,22 +30,33 @@
             <input class="nickname" type="text" placeholder="type your nickname" maxlength="14"/>
         </div>
     </div>
-    <div class="room_modal">
-        <div class="exit_container">
-            <div class="d1"></div>
-            <div class="d2"></div>
-            <div class="d3"></div>
-        </div>
-        <div>
-            <input class="room_input" type="text" placeholder="방 이름"/>
-            <div class="room_btns">
-                <button>방 생성</button>
-                <button>취소</button>
-            </div>
-        </div>
-    </div>
-    <script src="/js/user.js"></script>
-    <script src="/js/nav.js"></script>
     <script src="/js/clock.js"></script>
+    <script>
+        const login_page=document.querySelector(".login_page"),nick=document.querySelector(".nickname");
+        const USER_NICK="USER_NICK";
+        function handleNickname(e){
+            const target=e.target;
+            if(e.keyCode===13){
+                save_nickname(target.value);
+                target.value="";
+            }
+        }
+        function load_nickname(){
+            const nickname=sessionStorage.getItem(USER_NICK);
+            if(!nickname){login_page.style.display="block";}
+            else{login_page.style.display="none";}
+        }   
+        function save_nickname(nickname){
+            sessionStorage.setItem(USER_NICK,nickname);
+            login_page.style.display="none";
+            load_nickname();
+        }
+        function init(){
+            load_nickname();
+            nick.addEventListener("keydown",handleNickname);
+        }
+        
+        init();
+    </script>
 </body>
 </html>

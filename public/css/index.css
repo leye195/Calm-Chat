@@ -9,13 +9,7 @@ header{
     font-size: 1.2rem;
     border-bottom: 3px solid #989292;
 }
-header div{
-    display: initial;
-    text-align: right;
-    float: right;
-    cursor: pointer;
-    padding: 0.5px;
-}
+header div{display: initial;text-align: right;float: right;cursor: pointer;padding: 0.5px;}
 .title{font-weight: 700;}
 .h_icon,.js_room img{width: 30px;height: 30px;}
 .js_room img{position: relative;top:-5px;}
@@ -37,15 +31,32 @@ header div{
     width: 300px;
     font-size: 1.1rem;
 }
-.room{
+.list_container{overflow: scroll;}
+.group_list{display: none;}
+.one_list{display: block;}
+.g_room{
     position: relative;
     padding:15px;
     border-bottom:1px solid #b9b9b9;
     cursor: pointer;
 }
+.g_room div{
+   display: flex;
+}
+.o_room{
+    position: relative;
+    padding:15px;
+    border-bottom:1px solid #b9b9b9;
+    cursor: pointer;
+    display: flex;
+}
+.o_room>div{margin-left:10px;}
+.o_room>div>p:nth-child(1){font-weight: 700;}
+.o_room>div>p:nth-child(2){margin-top:5px; font-size: 0.5rem;color: #8a8a8a;}
+
 .room_ul li:nth-child(1){border-top: 1px solid #b9b9b9;}
-.room p{font-size: 1.1rem;display: inline-flex;}
-.room button{width: 100px;height: 21px;position: absolute;right: 10px;}
+.g_room p{font-size: 1.1rem;display: inline-flex;}
+.g_room button{width: 100px;height: 21px;position: absolute;right: 10px;}
 form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
 form input[type="text"]{
     width: 80%;
@@ -82,7 +93,8 @@ form #send{
 #message li { padding: 5px 10px; position: relative;}
 #message li:nth-child(odd) { background: #ffffff; }
 .log{text-align: center;color: #a9a8a8;}
-.user_img{width: 40px;height: 40px;}
+.group_img{border: 2px solid black;border-radius: 20px;}
+.user_img,.group_img{width: 40px;height: 40px;}
 .user_name{position: absolute;top:0;margin-left: 5px;}
 .user_msg{position: absolute;top: 35%;left: 7%;padding: 5px;border: 2px solid grey;border-radius: 10px;}
 .name_r{position: absolute;top: 0;right:52px;}
@@ -135,7 +147,7 @@ form #send{
 .room_btns button{width: 100px;height: 20px;}
 nav{
     display: flex;
-    background: #e0e0e0; 
+    background: #eaeaea; 
     position: absolute; 
     bottom: 0; 
     width: 100%;
@@ -153,11 +165,13 @@ nav a{
 a span{margin-left:6px;font-weight: 500;}
 a img{position: relative;height: 35px;top: 12px;}
 .active span,.active img{color:black;}
-.clock{
+.clock{text-align: center;font-weight: 600;font-size: 0.5rem;text-shadow: 6px 2px 4px #b3b3b3;margin-bottom: 9px; margin-top: 5px;}
+.chat_menu{
+    display: flex;
     text-align: center;
-    font-weight: 600;
-    font-size: 0.5rem;
-    text-shadow: 6px 2px 4px #b3b3b3;
-    margin-bottom: 9px;
-    margin-top: 5px;
+    background-color: #ececec;
+    align-items: center;
+    height: 25px;
 }
+.chat_menu div{flex-grow: 1;cursor: pointer;color: white;text-shadow: 1px 2px 3px #cecccc;}
+.menu_active{color:black !important;font-weight: 700;}
