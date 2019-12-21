@@ -40,9 +40,8 @@ header div{display: initial;text-align: right;float: right;cursor: pointer;paddi
     border-bottom:1px solid #b9b9b9;
     cursor: pointer;
 }
-.g_room div{
-   display: flex;
-}
+.g_room div{display: flex;align-items: center;}
+.g_room div>span{margin-left: 10px;}
 .o_room{
     position: relative;
     padding:15px;

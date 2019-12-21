@@ -1,10 +1,16 @@
 .friend_section{
     height: 100%;
-    border-bottom: 1px solid #dadada;
+    border-top: 1px solid #dadada;
 }
 .friend_main{
     height: 95px;
     text-align: center;
+}
+.user_div{
+    display: flex;
+}
+.user_div>div{
+    align-self: center;
 }
 .user_div img{
     margin:10px;
@@ -14,4 +20,10 @@
 }
 .user_div div>p{
     font-weight: 700;
+}
+.blank{
+    height: 25px;
+    widows: 100%;
+    border-top: 1px solid #dadada;;
+    border-bottom: 1px solid #dadada;
 }

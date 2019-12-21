@@ -19,10 +19,11 @@
             <div class="user_div">
                 <img src="/img/user.png"/>
                 <div>
-                    <p class="more_username">Username</p>
+                    <p class="username">Username</p>
                 </div>
             </div>
         </div>
+        <div class="blank"></div>
     </section>
     <nav>
         <a href="/" class="active">
@@ -44,6 +45,7 @@
     <script src="/js/clock.js"></script>
     <script>
         const login_page=document.querySelector(".login_page"),nick=document.querySelector(".nickname");
+        const username=document.querySelector(".username");
         const USER_NICK="USER_NICK";
         function handleNickname(e){
             const target=e.target;
@@ -55,7 +57,10 @@
         function load_nickname(){
             const nickname=sessionStorage.getItem(USER_NICK);
             if(!nickname){login_page.style.display="block";}
-            else{login_page.style.display="none";}
+            else{
+                login_page.style.display="none";
+                username.textContent=nickname;
+            }
         }   
         function save_nickname(nickname){
             sessionStorage.setItem(USER_NICK,nickname);
@@ -66,7 +71,6 @@
             load_nickname();
             nick.addEventListener("keydown",handleNickname);
         }
-        
         init();
     </script>
 </body>
