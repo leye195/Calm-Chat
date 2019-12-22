@@ -40,18 +40,13 @@ function create_tag(name,type){
     const li=document.createElement("li"),div=document.createElement("div"),
     r_div=document.createElement("div"),img=new Image();
     if(type==="group"){
-        const span=document.createElement("span"),button=document.createElement("button");
+        const span=document.createElement("span");
         div.classList.add("g_room");
         img.src="/img/group.png";
         img.className="group_img";
         span.innerText=name;
-        button.innerText="Enter";
-        button.addEventListener("click",()=>{
-            window.location.href=`/group/${name}`;
-        })
         r_div.appendChild(img);
         r_div.appendChild(span);
-        r_div.appendChild(button);
         div.appendChild(r_div);
     }else if(type==="personal"){
         const p1=document.createElement("p"),p2=document.createElement("p");
@@ -88,12 +83,11 @@ function toGroup(e){
     }
 }
 function init(){
-    //load_nickname();
-    btns.forEach((item,i)=>{
-        item.addEventListener("click",()=>{
-            window.location.href=`/group/${i+1}`;
-        })
-    });
+    group_list.addEventListener("click",(e)=>{
+        const {target}=e;
+        const name=target.querySelector("span").textContent;
+        window.location.href=`/group/${name}`;
+    })
     js_room.addEventListener("click",_open);
     exit_btn.addEventListener("click",_close);
     room_btns[0].addEventListener("click",create_room);
