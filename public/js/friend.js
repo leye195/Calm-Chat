@@ -15,18 +15,47 @@ function checkArrow(e){
 function open_addFriend(){
     f_div.classList.toggle("hide");
 }
-function add_list(){
-    const friend_id=document.querySelector(".friend_id");
-    console.log(friend_id.value);
-
+function create_friend_tag(user_id){
+    const li=document.createElement("li"),user_div=document.createElement("div"),img=new Image(),
+    div=document.createElement("div"),p=document.createElement("p");
+    p.className="username";
+    p.textContent=user_id;
+    img.src="/img/user.png";
+    user_div.className="user_div";
+    div.appendChild(p);
+    user_div.appendChild(img);
+    user_div.appendChild(div);
+    li.appendChild(user_div);
+    return li;
 }
-arrow.addEventListener("click",checkArrow);
-add_friend.addEventListener("click",open_addFriend);
-f_input.addEventListener("keyup",()=>{
-    clear_btn.style.visibility = (f_input.value.length)?"visible":"hidden";
-})
-clear_btn.addEventListener("click",()=>{
-    clear_btn.style.visibility = "hidden";
-    f_input.value="";
-})
-console.log(clear_btn);
+function handleAdd(e){
+    const {target}=e;
+    const f_list=document.querySelector(".friend_ul");
+    if(e.keyCode===13){
+        fetch(`user/${target.value}`)
+        .then((data)=>data.text())
+        .then((data)=>{
+            const result=JSON.parse(data);
+            console.log(result);
+            if(result['error']===0&&result['success']===1){
+                alert(JSON.stringify(result['result']));
+                f_list.appendChild(create_friend_tag(result['result']['email']));
+            }
+        })
+        target.value="";
+    }
+}
+function init(){
+    arrow.addEventListener("click",checkArrow);
+    add_friend.addEventListener("click",open_addFriend);
+    f_input.addEventListener("keyup",()=>{
+        clear_btn.style.visibility = (f_input.value.length)?"visible":"hidden";
+    });
+    clear_btn.addEventListener("click",()=>{
+        clear_btn.style.visibility = "hidden";
+        f_input.value="";
+    });
+    f_input.addEventListener("keydown",handleAdd);
+}
+init();
+
