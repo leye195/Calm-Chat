@@ -1,6 +1,6 @@
 ## SocIO Chat
 ### SocketIO based Chat (공부겸 빌딩중)
-#### 사용언어: html,css,VanillaJS 및 node.js express,socket.IO 
+#### 사용언어 및 기술: html,css,VanillaJS 및 node.js express,socket.IO 
 ### Feature
 <ul>
     <li>채팅 방 생성</li>

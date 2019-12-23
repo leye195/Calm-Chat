@@ -42,4 +42,12 @@ module.exports = function(app,User){
             }
         })
     })
+    app.post('/add_friend',(req,res)=>{
+        const {my,email}=req.body;
+        User.update({email:my},{
+            
+        },(err,output)=>{
+            if(err)res.status(500).json({error:1,msg:"DB Error"});
+        });
+    })
 }
