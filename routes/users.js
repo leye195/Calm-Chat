@@ -30,4 +30,15 @@ module.exports = function(app,User){
             }
         });
     });
+    //find User id to add friend
+    app.get('/user/:id',(req,res)=>{
+        const {user_id}=req.params;
+        User.find({email:user_id},(err,data)=>{
+            if(err)res.status(500).json({error:1,msg:"DB Error"});
+            if(data.length===0){res.json({error:2,msg:"User does not exists"});}
+            else{
+                res.json({error:0,success:1,results:data});
+            }
+        })
+    })
 }

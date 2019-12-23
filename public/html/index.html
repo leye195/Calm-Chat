@@ -8,13 +8,20 @@
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/css/friend.css">
     <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
     <header>
         <span class="title">SocIO</span><img class="h_icon" src="/img/h_icon.png">
+        <div class="js_friend"><img src="/img/add_friend.png"/></div>
     </header>
     <p class="clock"></p>
+    <div class="f_div">
+        <i class="fa fa-search icon"></i>
+        <input class="friend_id" type="text" placeholder="Friend's ID"/>
+        <span title="clear">&times;</span>
+    </div>
     <section class="friend_section">
         <div class="profile_main">
             <div class="user_div">
