@@ -27,3 +27,19 @@
     border-top: 1px solid #dadada;;
     border-bottom: 1px solid #dadada;
 }
+.friend_div{
+    position: relative;
+    display: flex;
+}
+.friend_div img{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    align-self: center;
+    right: 0;
+    cursor: pointer;
+}
+.friend_div p{
+ margin: 10px;
+ color:#cecece;
+}

@@ -1,12 +1,18 @@
 const express=require('express');
 const app=express();
 const http=require('http').createServer(app);
-const io=require("socket.io")(http) 
+const bodyParser=require('body-parser');
+const io=require("socket.io")(http);
+const db=require('./db')("socIO");
+const User=require("./model/user");
+const userRoute=require("./routes/users");
+
 //Initialize a new instance of socket.io by passing the http (the HTTP server) object
 //then listen on the connection event for incoming socket
 const port =  3030;
 let users=0;
 var socketList=[]
+app.use(express.json());
 app.use(express.static(__dirname + '/public'));
 io.on('connection',(socket)=>{
     socket.on("leaveRoom",(room,name)=>{
@@ -55,6 +61,8 @@ io.on('connection',(socket)=>{
 
 //socket.join()으로 room 접속, socket.leave()으로 room 나감, io.to() 특정 room에 이벤트 보내기
 //io.to("").emit("");
+
+userRoute(app,User);
 app.get('/',(req,res)=>{
     res.sendFile(__dirname+'/public/html/index.html');
 })

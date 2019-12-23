@@ -7,6 +7,7 @@
     <title>More</title>
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/css/more.css">
+    <link rel="stylesheet" href="/css/login.css">
     <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
@@ -29,17 +30,11 @@
                 <p>Themes</p>
             </div>
             <div class="account">
-                <img src="/img/account.png"/>
-                <p>Account</p>
+                <img src="/img/logout.png"/>
+                <p>LogOut</p>
             </div>
         </div>
     </section>
-    <div class="login_page" style="display: none;">
-        <div class="form">
-            <h3 class="form_h3">What is your nickname?</h3>
-            <input class="nickname" type="text" placeholder="type your nickname" maxlength="14"/>
-        </div>
-    </div>
     <nav>
         <a href="/">
             <img src="/img/friends.png"/><span>Friends</span>
@@ -51,9 +46,30 @@
             <img src="/img/more_active.png"/><span>More</span>
         </a>
     </nav>
-    
+    <div class="login_page " style="display: none;">
+        <div class="login_form">
+            <div><img src="/img/h_icon.png"><h3 class="login_h3">Login</h3></div>
+            <input class="u_name" type="text" placeholder="Email" name="email" value=""/><br/>
+            <input class="u_pwd" type="password" placeholder="Password" name="pwd" value=""/><br/>
+            <div class="login_btns">
+                <button class="login">로그인</button>
+                <button class="signup">회원가입</button>
+            </div>
+        </div>
+        <div class="signup_form hide">
+            <div><img src="/img/h_icon.png"><h3 class="signup_h3">SignUp</h3></div>
+            <input class="s_name" type="text" placeholder="Email" name="email"/><br/>
+            <input class="s_pwd" type="password" placeholder="Password" name="pwd"/><br/>
+            <input class="s_pwd_again" type="password" placeholder="Password Again" name="pwd_again"/><br/>
+            <div class="login_btns">
+                <button class="signup_confirm">확인</button>
+                <button class="signup_cancel">취소</button>
+            </div>
+        </div>
+    </div>
     <script src="/js/nav.js"></script>
     <script src="/js/clock.js"></script>
     <script src="/js/more.js"></script>
+    <script src="/js/login.js"></script>
 </body>
 </html>

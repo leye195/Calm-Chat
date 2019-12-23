@@ -1,8 +1,8 @@
 const socket=io();
 const f=document.querySelector("form"),input=document.querySelector("#m"),
     send=document.querySelector("#send"),u=document.querySelector("#message"),
-    e_btn=document.querySelector(".exit_btn");
-const USER_NICK="USER_NICK";
+    e_btn=document.querySelector(".exit_btn"),arrow=document.querySelector(".friend_arrow");
+const USER_NAME="USER_NAME";
 //inform the number of participant in the room
 function participantsMessage(data){
     let msg=`방 참가 인원: ${data.numbers}명`;
@@ -49,7 +49,7 @@ function sendMessage(name,msg){
 }
 //load username from sessionStorage
 function loadUser(){
-    const user=sessionStorage.getItem(USER_NICK);
+    const user=sessionStorage.getItem(USER_NAME);
     log(`Welcome ${user}`);
     return user;
 }

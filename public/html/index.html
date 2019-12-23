@@ -7,6 +7,7 @@
     <title>SocIO</title>
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/css/friend.css">
+    <link rel="stylesheet" href="/css/login.css">
     <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
@@ -24,6 +25,10 @@
             </div>
         </div>
         <div class="blank"></div>
+        <div class="friend_div">
+            <p>Friends</p>
+            <img class="friend_arrow up" src="/img/up_arrow.png">
+        </div>
     </section>
     <nav>
         <a href="/" class="active">
@@ -36,42 +41,29 @@
             <img src="/img/more.png"/><span>More</span>
         </a>
     </nav>
-    <div class="login_page">
-        <div class="form">
-            <h3 class="form_h3">What is your nickname?</h3>
-            <input class="nickname" type="text" placeholder="type your nickname" maxlength="14"/>
+    <div class="login_page ">
+        <div class="login_form">
+            <div><img src="/img/h_icon.png"><h3 class="login_h3">Login</h3></div>
+            <input class="u_name" type="text" placeholder="Email" name="email" value=""/><br/>
+            <input class="u_pwd" type="password" placeholder="Password" name="pwd" value=""/><br/>
+            <div class="login_btns">
+                <button class="login">로그인</button>
+                <button class="signup">회원가입</button>
+            </div>
+        </div>
+        <div class="signup_form hide">
+            <div><img src="/img/h_icon.png"><h3 class="signup_h3">SignUp</h3></div>
+            <input class="s_name" type="text" placeholder="Email" name="email"/><br/>
+            <input class="s_pwd" type="password" placeholder="Password" name="pwd"/><br/>
+            <input class="s_pwd_again" type="password" placeholder="Password Again" name="pwd_again"/><br/>
+            <div class="login_btns">
+                <button class="signup_confirm">확인</button>
+                <button class="signup_cancel">취소</button>
+            </div>
         </div>
     </div>
     <script src="/js/clock.js"></script>
-    <script>
-        const login_page=document.querySelector(".login_page"),nick=document.querySelector(".nickname");
-        const username=document.querySelector(".username");
-        const USER_NICK="USER_NICK";
-        function handleNickname(e){
-            const target=e.target;
-            if(e.keyCode===13){
-                save_nickname(target.value);
-                target.value="";
-            }
-        }
-        function load_nickname(){
-            const nickname=sessionStorage.getItem(USER_NICK);
-            if(!nickname){login_page.style.display="block";}
-            else{
-                login_page.style.display="none";
-                username.textContent=nickname;
-            }
-        }   
-        function save_nickname(nickname){
-            sessionStorage.setItem(USER_NICK,nickname);
-            login_page.style.display="none";
-            load_nickname();
-        }
-        function init(){
-            load_nickname();
-            nick.addEventListener("keydown",handleNickname);
-        }
-        init();
-    </script>
+    <script src="/js/login.js"></script>
+    <script src="/js/friend.js"></script>
 </body>
 </html>

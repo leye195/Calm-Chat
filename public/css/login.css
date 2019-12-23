@@ -1,0 +1,22 @@
+.hide{
+    display: none;
+    visibility: hidden;
+}
+.u_name,.u_pwd,.u_pwd_again {
+    all:unset;
+    border-bottom: 1px solid white;
+    margin: 10px;
+    color: white;
+    text-align: center;
+    width: 300px;
+    font-size: 1.1rem;
+}
+.s_name,.s_pwd,.s_pwd_again {
+    all:unset;
+    border-bottom: 1px solid white;
+    margin: 10px;
+    color: white;
+    text-align: center;
+    width: 300px;
+    font-size: 1.1rem;
+}
