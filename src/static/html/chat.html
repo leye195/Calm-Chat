@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Socket ChatRoom</title>
+    <link rel="stylesheet" href="/static/css/index.css" />
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <header>
+      <span class="title">SocIO</span
+      ><img class="h_icon" src="/static/img/h_icon.png" />
+      <div class="exit_btn"><img src="/static/img/leave.png" /></div>
+    </header>
+    <p class="clock"></p>
+    <ul id="message"></ul>
+    <form>
+      <button id="img_btn">+</button>
+      <input
+        id="m"
+        type="text"
+        autocomplete="off"
+        placeholder="type a message"
+      />
+      <button id="send">Send</button>
+    </form>
+    <script src="/static/js/index.js"></script>
+    <script src="/static/js/clock.js"></script>
+  </body>
+</html>
