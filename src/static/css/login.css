@@ -1,21 +1,60 @@
-.hide{
-    display: none;
+.hide {
+  display: none;
 }
-.u_name,.u_pwd,.u_pwd_again {
-    all:unset;
-    border-bottom: 1px solid white;
-    margin: 10px;
-    color: white;
-    text-align: center;
-    width: 300px;
-    font-size: 1.1rem;
+.login_page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  background-color: #0000008c;
+  width: 100%;
+  height: 100%;
+  top: 0;
 }
-.s_name,.s_pwd,.s_pwd_again {
-    all:unset;
-    border-bottom: 1px solid white;
-    margin: 10px;
-    color: white;
-    text-align: center;
-    width: 300px;
-    font-size: 1.1rem;
+.hide {
+  display: none;
+}
+.login_page .login_form {
+  position: absolute;
+  text-align: center;
+  top: 30%;
+  padding: 20px;
+  background-color: #7c8009;
+  border-radius: 20px;
+}
+.login_h3,
+.name {
+  color: white;
+  font-size: 1.1rem;
+}
+
+.login_btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login_btns button {
+  cursor: pointer;
+  margin: 15px;
+  width: 100%;
+  height: 25px;
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+  color: black;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+.u_name {
+  all: unset;
+  border-bottom: 1px solid white;
+  margin: 10px;
+  color: white;
+  text-align: center;
+  width: 300px;
+  font-size: 1.1rem;
+  padding: 5px;
+}
+.u_name::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }

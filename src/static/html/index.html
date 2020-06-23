@@ -4,54 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>SocIO</title>
+    <title>쏙Chat</title>
+    <link rel="stylesheet" href="/static/css/reset.css" />
     <link rel="stylesheet" href="/static/css/index.css" />
-    <link rel="stylesheet" href="/static/css/friend.css" />
     <link rel="stylesheet" href="/static/css/login.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="/socket.io/socket.io.js" defer></script>
   </head>
   <body>
     <header>
-      <span class="title">SocIO</span
-      ><img class="h_icon" src="/static/img/h_icon.png" />
-      <div class="js_friend"><img src="/static/img/add_friend.png" /></div>
+      <span class="title">쏙Chat</span>
+      <img class="h_icon" src="/static/img/h_icon.png" />
     </header>
-    <p class="clock"></p>
-    <div class="f_div hide">
-      <i class="fa fa-search icon"></i>
-      <input class="friend_id" type="text" placeholder="Friend's ID" />
-      <span title="clear">&times;</span>
-    </div>
-    <section class="friend_section">
-      <div class="profile_main">
-        <div class="user_div">
-          <img src="/static/img/user.png" />
-          <div>
-            <p class="username">Username</p>
-          </div>
-        </div>
-      </div>
-      <div class="blank"></div>
-      <div class="friend_div">
-        <p>Friends</p>
-        <img class="friend_arrow up" src="/static/img/up_arrow.png" />
-      </div>
-      <ul class="friend_ul f_down"></ul>
-    </section>
-    <nav>
-      <a href="/" class="active">
-        <img src="/static/img/friends_active.png" /><span>Friends</span>
-      </a>
-      <a href="/chats">
-        <img src="/static/img/chat.png" /><span>Chats</span>
-      </a>
-      <a href="/more"> <img src="/static/img/more.png" /><span>More</span> </a>
-    </nav>
-    <div class="login_page ">
+    <main>
+      <section class="message-section">
+        <p class="message-count-joiner">
+          0명의 쏙민들이 채팅에 참여하고 있습니다
+        </p>
+        <ul class="message-container"></ul>
+      </section>
+      <section class="form-container">
+        <form class="message-form" method="POST">
+          <textarea class="message-text" name="msg"></textarea>
+          <input class="message-sender" type="submit" value="전송" />
+        </form>
+      </section>
+    </main>
+    <div class="login_page">
       <div class="login_form">
         <div>
           <img src="/static/img/h_icon.png" />
@@ -60,61 +42,15 @@
         <input
           class="u_name"
           type="text"
-          placeholder="Email"
-          name="email"
+          placeholder="닉네임 ( 닉네임 최대 길이 7 )"
+          name="name"
           value=""
-        /><br />
-        <input
-          class="u_pwd"
-          type="password"
-          placeholder="Password"
-          name="pwd"
-          value=""
-        /><br />
+        />
         <div class="login_btns">
-          <button class="login">로그인</button>
-          <button class="signup">회원가입</button>
-        </div>
-      </div>
-      <div class="signup_form hide">
-        <div>
-          <img src="/static/img/h_icon.png" />
-          <h3 class="signup_h3">SignUp</h3>
-        </div>
-        <input
-          class="s_name"
-          type="text"
-          placeholder="Email"
-          name="email"
-        /><br />
-        <input
-          class="s_pwd"
-          type="password"
-          placeholder="Password"
-          name="pwd"
-        /><br />
-        <input
-          class="s_pwd_again"
-          type="password"
-          placeholder="Password Again"
-          name="pwd_again"
-        /><br />
-        <div class="login_btns">
-          <button class="signup_confirm">확인</button>
-          <button class="signup_cancel">취소</button>
+          <button class="login">입장</button>
         </div>
       </div>
     </div>
-    <div class="friend_info hide">
-      <div class="info_form">
-        <p>&times;</p>
-        <img src="/static/img/user.png" />
-        <p>ID</p>
-        <button>추가하기</button>
-      </div>
-    </div>
-    <script src="/static/js/clock.js"></script>
-    <script src="/static/js/login.js"></script>
-    <script src="/static/js/friend.js"></script>
+    <script src="/static/js/index.js" type="module"></script>
   </body>
 </html>
