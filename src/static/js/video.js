@@ -2,7 +2,7 @@
   let player,
     volume = document.querySelector(".fas"),
     muted = false;
-  function onYouTubeIframeAPIReady() {
+  const onYouTubeIframeAPIReady = () => {
     player = new YT.Player("player", {
       videoId: "G1FWEvmWnEo", // The video id.
       width: "100%",
@@ -21,11 +21,18 @@
       },
       events: {
         onReady: function (e) {
-          e.target.setVolume(5); // For max value, set value as 100.
+          e.target.setVolume(10); // For max value, set value as 100;
+          player.playVideo();
+        },
+        onStateChange: function (e) {
+          console.log(e.data);
+          if (e.data === -1) {
+            onYouTubeIframeAPIReady();
+          }
         },
       },
     });
-  }
+  };
   const toggleVolume = () => {
     if (player) {
       if (muted) {

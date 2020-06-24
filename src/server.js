@@ -8,7 +8,6 @@ import socketEvent from "./socket";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import "./db";
-import roomRouter from "./routes/roomRouter";
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -18,7 +17,6 @@ app.use(cookieParser());
 app.use(morgan("dev"));
 
 app.use("/", globalRouter);
-app.use("/rooms", roomRouter);
 //io.emit('some event', { someProperty: 'some value', otherProperty: 'other value' });
 // This will emit the event to all connected sockets
 
