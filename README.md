@@ -32,4 +32,4 @@ PORT = ${PORT_NUMBER}
 
 - 설치: npm install
 
-- 실행: nodemon --exec babel-node src/server
+- 실행: npm run dev:server
