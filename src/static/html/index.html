@@ -8,21 +8,30 @@
     <link rel="stylesheet" href="/static/css/reset.css" />
     <link rel="stylesheet" href="/static/css/index.css" />
     <link rel="stylesheet" href="/static/css/login.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+    <script
+      src="https://kit.fontawesome.com/e8c0c78b52.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="/socket.io/socket.io.js" defer></script>
+    <script src="//www.youtube.com/iframe_api"></script>
   </head>
   <body>
+    <div class="background">
+      <div class="frame-container">
+        <div id="player"></div>
+      </div>
+    </div>
     <header>
-      <span class="title">쏙Chat</span>
-      <img class="h_icon" src="/static/img/h_icon.png" />
+      <div>
+        <span class="title">CalmChat</span>
+        <img class="h_icon" src="/static/img/h_icon.png" />
+      </div>
+      <span class="volume"><i class="fas fa-volume-up"></i> </span>
     </header>
     <main>
       <section class="message-section">
         <p class="message-count-joiner">
-          0명의 쏙민들이 채팅에 참여하고 있습니다
+          0명이 캠프에 있습니다
         </p>
         <ul class="message-container"></ul>
       </section>
@@ -37,12 +46,12 @@
       <div class="login_form">
         <div>
           <img src="/static/img/h_icon.png" />
-          <h3 class="login_h3">Login</h3>
+          <h3 class="login_h3">이름을 알려주세요</h3>
         </div>
         <input
           class="u_name"
           type="text"
-          placeholder="닉네임 ( 닉네임 최대 길이 7 )"
+          placeholder="이름 ( 이름 최대 길이 7 )"
           name="name"
           value=""
         />

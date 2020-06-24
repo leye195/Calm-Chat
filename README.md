@@ -7,6 +7,5 @@
 ### ToDo
 
 - [x] html 및 css 가본 스타일링 및 작성
-- [ ] socket.IO 활용 사용자간 상호 채팅 가능
-- [ ] 유저 입장시 효과음
-- [ ] 빗소리 배경음 설정
+- [x] socket.IO server-client 간 정보 전달 활용 사용자간 채팅 가능
+- [x] Youtube IFrame API 활용 영상 설정

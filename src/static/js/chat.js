@@ -7,7 +7,8 @@
     messageContainer = document.querySelector(".message-container");
   const loginContainer = document.querySelector(".login_page"),
     userName = document.querySelector(".u_name"),
-    enterButton = document.querySelector(".login_btns .login");
+    enterButton = document.querySelector(".login_btns .login"),
+    frame = document.querySelector("#ytplayer");
   const clientSocket = io.connect("/");
   const setUserName = (name) => {
     sessionStorage.setItem("username", name);
@@ -19,12 +20,16 @@
       loginContainer.classList.add("hide");
     }
   };
-  const createLeftMessage = (name) => {
+  const createNoticeMessage = (name, type) => {
     const messageDiv = document.createElement("div"),
       noticeMessage = document.createElement("p");
-    noticeMessage.innerText = `"${name}" 가 쏙Chat을 떠났습니다.`;
+    noticeMessage.className = "message-notice";
     messageDiv.className = "message-item";
-    noticeMessage.className = "message-leave";
+    if (type === "join") {
+      noticeMessage.innerText = `${name}님이 캠프에 들어왔습니다.`;
+    } else if (type === "leave") {
+      noticeMessage.innerText = `${name}님이 캠프를 떠났습니다.`;
+    }
     messageDiv.appendChild(noticeMessage);
     messageContainer.appendChild(messageDiv);
   };
@@ -50,7 +55,7 @@
   };
   const onSetUserCount = (num) => {
     if (notice) {
-      notice.textContent = `${num}명의 쏙민들이 채팅에 참여하고 있습니다`;
+      notice.textContent = `${num}명이 캠프에 있습니다`;
     }
   };
   const onJoin = () => {
@@ -58,13 +63,14 @@
       clientSocket.emit("join", user);
       clientSocket.on("join", (data) => {
         onSetUserCount(data.total);
+        createNoticeMessage(data.name, "join");
       });
     }
   };
   const onLeft = () => {
     clientSocket.on("left", (data) => {
       onSetUserCount(data.total);
-      createLeftMessage(data.name);
+      createNoticeMessage(data.name, "leave");
     });
   };
   const onReceiveMessage = () => {
@@ -106,7 +112,6 @@
     form.addEventListener("submit", onSubmit);
     enterButton.addEventListener("click", onClickEnter);
     textArea.addEventListener("keydown", onPressEnter);
-    getUserName();
     onJoin();
     onLeft();
     onReceiveMessage();
