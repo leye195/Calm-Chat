@@ -1,6 +1,3 @@
-.hide {
-  display: none;
-}
 .login_page {
   display: flex;
   align-items: center;
@@ -11,9 +8,7 @@
   height: 100%;
   top: 0;
 }
-.hide {
-  display: none;
-}
+
 .login_page .login_form {
   position: absolute;
   text-align: center;
@@ -22,16 +17,19 @@
   background-color: #000000;
   border-radius: 20px;
 }
+
 .login_h3,
 .name {
   color: white;
   font-size: 1.1rem;
 }
+
 .login_btns {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .login_btns button {
   cursor: pointer;
   margin: 15px;
@@ -44,6 +42,7 @@
   font-size: 1.2rem;
   font-weight: 800;
 }
+
 .u_name {
   all: unset;
   border-bottom: 1px solid white;
@@ -54,6 +53,11 @@
   font-size: 1.1rem;
   padding: 5px;
 }
+
 .u_name::placeholder {
   color: rgba(255, 255, 255, 0.5);
+}
+
+.hide {
+  display: none;
 }

@@ -3,12 +3,14 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   font-size: 13px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background: #e3e3e3;
 }
+
 header {
   display: flex;
   align-items: center;
@@ -22,6 +24,7 @@ header {
   border-bottom: 3px solid #989292;
   margin: 0 auto;
 }
+
 main {
   width: 60%;
   margin: 0 auto;
@@ -29,6 +32,7 @@ main {
   min-height: 95vh;
   overflow: scroll;
 }
+
 .background {
   position: absolute;
   width: 100%;
@@ -38,12 +42,14 @@ main {
   justify-content: center;
   z-index: -1;
 }
+
 .background .frame-container {
   width: 60%;
   height: 100%;
   filter: blur(2px);
   background-color: black;
 }
+
 header div {
   display: initial;
   text-align: right;
@@ -51,15 +57,18 @@ header div {
   cursor: pointer;
   padding: 0.5px;
 }
+
 .title {
   font-weight: 700;
 }
+
 .h_icon,
 .js_room img,
 .js_friend img {
   width: 30px;
   height: 30px;
 }
+
 .icon {
   flex-grow: 1;
   text-align: center;
@@ -67,11 +76,13 @@ header div {
   color: white;
   background: black;
 }
+
 .message-section {
   background-color: #e0daff52;
   width: 100%;
   height: 87vh;
 }
+
 .message-section .message-count-joiner {
   display: flex;
   align-items: center;
@@ -94,6 +105,7 @@ header div {
   align-items: center;
   justify-content: center;
 }
+
 .form-container form {
   display: flex;
   align-items: center;
@@ -101,10 +113,12 @@ header div {
   width: 100%;
   height: 100%;
 }
+
 .form-container form input {
   all: unset;
   height: 50%;
 }
+
 .form-container form .message-text {
   resize: none;
   flex: 0.9;
@@ -114,6 +128,7 @@ header div {
   border-radius: 10px;
   overflow: hidden;
 }
+
 .form-container form .message-sender {
   width: 10%;
   text-align: center;
@@ -124,18 +139,22 @@ header div {
   border-radius: 10px;
   cursor: pointer;
 }
+
 .message-container {
   height: 95%;
   overflow: scroll;
 }
+
 .message-item {
   display: flex;
   flex-direction: column;
   padding: 5px;
 }
+
 .message-item.right {
   align-items: flex-end;
 }
+
 .message-item.left {
   align-items: flex-start;
 }
@@ -159,6 +178,7 @@ header div {
   border-radius: 20px;
   animation: noticeShowUp 1s ease-in-out;
 }
+
 .user-name {
   display: inline-flex;
   padding: 5px;
@@ -170,6 +190,7 @@ header div {
   background: white;
   font-weight: 800;
 }
+
 .message-text {
   position: relative;
   padding: 10px;
@@ -180,9 +201,11 @@ header div {
   word-break: break-word;
   animation: noticeShowUp 0.7s ease-in-out;
 }
+
 .message-text.left {
   margin-left: 40px;
 }
+
 .message-text.left::before {
   content: "";
   background-color: white;
@@ -196,6 +219,7 @@ header div {
 .message-text.right {
   margin-right: 40px;
 }
+
 .message-text.right::after {
   content: "";
   background-color: white;
